@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../redux/modules/todoModule";
+import { addTodo, removeTodo } from "../redux/modules/todoModule";
+
 const Home = () => {
   // 1. input useState
   const [titleInput, setTitleInput] = useState("");
@@ -29,6 +30,9 @@ const Home = () => {
   };
 
   //TODO: 5. remove button handler
+  const removeBtnHandler = (id) => {
+    dispatch(removeTodo(id));
+  };
 
   //TODO: 6. moveTodoList button handler
 
@@ -45,6 +49,7 @@ const Home = () => {
             <div key={item.id}>
               <h1>{item.title}</h1>
               <h3>{item.desc}</h3>
+              <button onClick={() => removeBtnHandler(item.id)}>삭제</button>
             </div>
           );
         })}

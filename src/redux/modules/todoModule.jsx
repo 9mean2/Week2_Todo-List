@@ -1,6 +1,9 @@
 // 1. Actions
 const CREATE = "todo/CREATE";
 
+// REMOVE()
+const REMOVE = "todo/REMOVE";
+
 // 2. Action Creators
 //create
 export function addTodo(title, desc) {
@@ -8,6 +11,14 @@ export function addTodo(title, desc) {
     type: CREATE,
     title,
     desc,
+  };
+}
+
+// remove
+export function removeTodo(id) {
+  return {
+    type: REMOVE,
+    id,
   };
 }
 
@@ -35,6 +46,8 @@ export default function reducer(state = initialState, action = {}) {
           isDone: false,
         },
       ];
+    case REMOVE:
+      return state.filter((item) => item.id !== action.id);
     default:
       return state;
   }
