@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/modules/todoModule";
 import Input from "../common/Input";
@@ -21,7 +21,9 @@ function InputBox() {
   const dispatch = useDispatch();
 
   //TODO: 3. create button handler
-  const addBtnHandler = () => {
+  const addBtnHandler = (event) => {
+    event.preventDefault();
+
     if (titleInput !== "") {
       dispatch(addTodo(titleInput, descInput));
       setTitleInput("");
@@ -29,11 +31,22 @@ function InputBox() {
     }
   };
 
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [titleInput]);
+
   return (
     <>
-      <Input onChange={titleChangeHandler} vlaue={titleInput} />
-      <Input onChange={descChangeHandler} vlaue={descInput} />
-      <Button onClick={addBtnHandler} text="추가하기" />
+      <form action="/" onSubmit={addBtnHandler}>
+        <Input
+          refprops={inputRef}
+          onChange={titleChangeHandler}
+          value={titleInput}
+        />
+        <Input onChange={descChangeHandler} value={descInput} />
+        <Button text="추가하기" />
+      </form>
     </>
   );
 }

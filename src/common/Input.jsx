@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Input({ onChange, value }) {
+export default function Input({ onChange, value, refprops }) {
   return (
     <>
-      <input onChange={onChange} value={value} />
+      <input ref={refprops} onChange={onChange} value={value} />
     </>
   );
 }
