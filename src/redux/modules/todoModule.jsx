@@ -4,6 +4,9 @@ const CREATE = "todo/CREATE";
 // REMOVE()
 const REMOVE = "todo/REMOVE";
 
+// TODOMOVE()
+const TODOMOVE = "todo/TODOMOVE";
+
 // 2. Action Creators
 //create
 export function addTodo(title, desc) {
@@ -22,6 +25,14 @@ export function removeTodo(id) {
   };
 }
 
+// todomove
+export function todomove(id) {
+  return {
+    type: TODOMOVE,
+    id,
+  };
+}
+
 // 3. 초기 상태값
 const initialState = [
   {
@@ -29,6 +40,12 @@ const initialState = [
     title: "리액트 공부 하기",
     desc: "리액트를 공부하는거임",
     isDone: false,
+  },
+  {
+    id: 1,
+    title: "hello world!",
+    desc: "테스트",
+    isDone: true,
   },
 ];
 
@@ -48,6 +65,11 @@ export default function reducer(state = initialState, action = {}) {
       ];
     case REMOVE:
       return state.filter((item) => item.id !== action.id);
+    case TODOMOVE:
+      return state.map((item) =>
+        item.id === action.id ? { ...item, isDone: !item.isDone } : item
+      );
+
     default:
       return state;
   }
