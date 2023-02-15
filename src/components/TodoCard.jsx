@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTodo, todomove } from "../redux/modules/todoModule";
 import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
 
 function TodoCard({ Done }) {
   // 1. useSelector로 store 접근
@@ -22,6 +23,9 @@ function TodoCard({ Done }) {
     dispatch(todomove(id));
   };
 
+  // 5. navigate를 통해 상세 페이지 접근
+  const navigate = useNavigate();
+
   return (
     <>
       {data
@@ -30,6 +34,9 @@ function TodoCard({ Done }) {
           console.log(item);
           return (
             <div key={item.id}>
+              <button onClick={() => navigate(`/${item.id}`)}>
+                상세페이지
+              </button>
               <h1>{item.title}</h1>
               <h3>{item.desc}</h3>
               <Button onClick={() => removeBtnHandler(item.id)} text={"삭제"} />
