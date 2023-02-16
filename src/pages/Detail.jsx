@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 function Detail() {
   // 스토어에 접근하기 위해 useSelector
@@ -19,14 +20,28 @@ function Detail() {
 
   return (
     <>
-      <div>
-        <p>{`id: ${foundData.id}`}</p>
+      <StContainer>
+        <StDialogHeader>{`id: ${foundData.id}`}</StDialogHeader>
         <h1>{foundData.title}</h1>
         <h3>{foundData.desc}</h3>
         <button onClick={() => navigate("/")}>집으로 가자</button>
-      </div>
+      </StContainer>
     </>
   );
 }
 
 export default Detail;
+
+const StContainer = styled.div`
+  border: 1px solid gray;
+  width: 500px;
+  height: 500px;
+`;
+
+const StDialogHeader = styled.div`
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  padding: 0 24px;
+  align-items: center;
+`;

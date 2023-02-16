@@ -3,6 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeTodo, todomove } from "../redux/modules/todoModule";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const StBox = styled.div`
+  width: 270px;
+  border: 4px solid teal;
+  min-height: 150px;
+  border-radius: 12px;
+  padding: 12px 24px 24px 24px;
+`;
 
 function TodoCard({ Done }) {
   // 1. useSelector로 store 접근
@@ -33,7 +42,7 @@ function TodoCard({ Done }) {
         .map((item) => {
           console.log(item);
           return (
-            <div key={item.id}>
+            <StBox key={item.id}>
               <button onClick={() => navigate(`/${item.id}`)}>
                 상세페이지
               </button>
@@ -44,7 +53,7 @@ function TodoCard({ Done }) {
                 onClick={() => moveTodoListBtnHandler(item.id)}
                 text={item.isDone ? "취소" : "완료"}
               />
-            </div>
+            </StBox>
           );
         })}
     </>
