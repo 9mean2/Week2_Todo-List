@@ -9,11 +9,10 @@ const TODOMOVE = "todo/TODOMOVE";
 
 // 2. Action Creators
 //create
-export function addTodo(title, desc) {
+export function addTodo(payload) {
   return {
     type: CREATE,
-    title,
-    desc,
+    payload,
   };
 }
 
@@ -54,15 +53,8 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE:
       //[...기존값을, {새로운 객체로 넣어줘라}]
-      return [
-        ...state,
-        {
-          id: Date.now(),
-          title: action.title,
-          desc: action.desc,
-          isDone: false,
-        },
-      ];
+      return [...state, action.payload];
+
     case REMOVE:
       return state.filter((item) => item.id !== action.id);
     case TODOMOVE:

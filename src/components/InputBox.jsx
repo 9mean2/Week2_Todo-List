@@ -25,7 +25,14 @@ function InputBox() {
     event.preventDefault();
 
     if (titleInput !== "") {
-      dispatch(addTodo(titleInput, descInput));
+      dispatch(
+        addTodo({
+          title: titleInput,
+          desc: descInput,
+          id: Date.now(),
+          isDone: false,
+        })
+      );
       setTitleInput("");
       setDescInput("");
     }
